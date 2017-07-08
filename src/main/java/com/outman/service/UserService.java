@@ -11,5 +11,5 @@ import com.outman.po.User;
  * Description:
  */
 public interface UserService {
-    public User findUserById(int id);
+    User findUserById(int id);
 }

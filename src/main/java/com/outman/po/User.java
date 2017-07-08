@@ -10,9 +10,9 @@ package com.outman.po;
  */
 public class User {
 
-    private Integer id;
+    private Integer id;//用户id
 
-    private String username;
+    private String username;//用户名称
 
     public Integer getId() {
         return id;

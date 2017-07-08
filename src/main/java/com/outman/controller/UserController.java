@@ -24,8 +24,8 @@ public class UserController {
     private UserService userService;
 
 
-    @RequestMapping("/UserQuery")
-    public ModelAndView editItemsQuery() throws Exception {
+    @RequestMapping("/userQuery")
+    public ModelAndView userQuery() throws Exception {
 
         //查询id为1的用户
         User user = userService.findUserById(1);
