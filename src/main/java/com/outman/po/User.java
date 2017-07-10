@@ -1,5 +1,7 @@
 package com.outman.po;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: outman
@@ -8,7 +10,7 @@ package com.outman.po;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-public class User {
+public class User implements Serializable{
 
     private Integer id;//用户id
 

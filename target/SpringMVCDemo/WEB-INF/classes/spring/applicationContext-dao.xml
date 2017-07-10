@@ -7,8 +7,9 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd ">
 
-    <!-- 加载db.properties文件 -->
-    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 加载db.properties,redis.properties文件 -->
+    <context:property-placeholder
+            location="classpath:db.properties,classpath:redis.properties"/>
 
     <!-- 配置数据源 ，dbcp -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -37,6 +38,26 @@
         <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
         <property name="basePackage" value="com.outman.mapper"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 配置数据源,redis -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxTotal" value="${redis.maxActive}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="poolConfig" />
+        <constructor-arg name="host" value="${redis.host}" />
+        <constructor-arg name="port" value="${redis.port}" type="int" />
+        <constructor-arg name="timeout" value="${redis.timeout}" type="int" />
+    </bean>
+
+    <!-- jedisPool注入 -->
+    <bean id="jedisUtils" class="com.outman.utils.JedisUtils">
+        <property name="jedisPool" ref="jedisPool"/>
     </bean>
 
 </beans>
