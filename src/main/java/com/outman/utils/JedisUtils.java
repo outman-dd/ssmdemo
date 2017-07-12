@@ -18,7 +18,6 @@ public class JedisUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JedisPool.class);
 
-    @Autowired
     private static JedisPool jedisPool;
 
     private static Jedis jedis;
